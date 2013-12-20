@@ -1,4 +1,4 @@
 Mail_It
 =======
 
-A java mail GUI (only sending)
+A java mailing GUI
