@@ -1,4 +1,4 @@
-package Mail_It;
+package mail_It;
 	
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;

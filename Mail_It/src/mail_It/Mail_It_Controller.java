@@ -1,4 +1,4 @@
-package Mail_It;
+package mail_It;
 
 public class Mail_It_Controller {
 	
