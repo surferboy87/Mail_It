@@ -28,10 +28,10 @@ public class MailTester {
 		
 		MyProperties props = new MyProperties();
 		//props.setSMTPprop("mail_it@bluewin.ch", "smtpauth.bluewin.ch", "587");
-//		props.setSMTPSprop("mail_it@bluewin.ch", "smtpauths.bluewin.ch", "465");
-//		
-//		Mailer mailer = new Mailer();
-//		mailer.sendMail(mail_2, props);
+		props.setSMTPSprop("mail_it@bluewin.ch", "smtpauths.bluewin.ch", "465");
+		
+		Mailer mailer = new Mailer();
+		mailer.sendMail(mail_2, props);
 	}
 
 }

@@ -8,9 +8,6 @@ package mail_It;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -20,6 +17,9 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseEvent;
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 
 public class Mail_It_Controller {
@@ -78,7 +78,6 @@ public class Mail_It_Controller {
         // handle the event here
     	log.info("The window will close know");
     	System.exit(0);
-    	
     }
 
     // Handler for ToggleButton[fx:id="logBut"] onMouseClicked
@@ -105,22 +104,5 @@ public class Mail_It_Controller {
         // handle the event here
     }
 
-    @FXML // This method is called by the FXMLLoader when initialization is complete
-    void initialize() {
-        assert fromAdr != null : "fx:id=\"fromAdr\" was not injected: check your FXML file 'Mail_It.fxml'.";
-        assert fromLab != null : "fx:id=\"fromLab\" was not injected: check your FXML file 'Mail_It.fxml'.";
-        assert logBut != null : "fx:id=\"logBut\" was not injected: check your FXML file 'Mail_It.fxml'.";
-        assert logText != null : "fx:id=\"logText\" was not injected: check your FXML file 'Mail_It.fxml'.";
-        assert msgText != null : "fx:id=\"msgText\" was not injected: check your FXML file 'Mail_It.fxml'.";
-        assert prioBut != null : "fx:id=\"prioBut\" was not injected: check your FXML file 'Mail_It.fxml'.";
-        assert sendBut != null : "fx:id=\"sendBut\" was not injected: check your FXML file 'Mail_It.fxml'.";
-        assert subLab != null : "fx:id=\"subLab\" was not injected: check your FXML file 'Mail_It.fxml'.";
-        assert subText != null : "fx:id=\"subText\" was not injected: check your FXML file 'Mail_It.fxml'.";
-        assert toAdr != null : "fx:id=\"toAdr\" was not injected: check your FXML file 'Mail_It.fxml'.";
-        assert toLab != null : "fx:id=\"toLab\" was not injected: check your FXML file 'Mail_It.fxml'.";
-
-        // Initialize your logic here: all @FXML variables will have been injected
-
-    }
 
 }
