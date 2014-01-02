@@ -20,9 +20,13 @@ public class Mailer {
 	public Mailer(){}
 	
 	/**
+	 * Will send a mail from the Mail-Class with defined connection properties to the addressee stored
+	 * in the mail Object.
 	 * 
-	 * @param mail
-	 * @param props
+	 * @param mail the mail who will be send
+	 * @param props the connection properties
+	 * @exception MessagingException if something didn't work
+	 * @see Mail
 	 */
 	public void sendMail(Mail mail, MyProperties props){
 		
@@ -33,7 +37,7 @@ public class Mailer {
 		// We set up a session with the defined properties before
 		Session session = Session.getInstance(props.getSMTPsProp(), auth);
 		
-		// Comment it out for less information
+		// Set it to false for less information
 		session.setDebug(true);
 
 		try {
@@ -44,14 +48,15 @@ public class Mailer {
 			msg.setSubject(mail.getSubject());
 			Date sendDate = new Date();
 			msg.setSentDate(sendDate);
+			msg.setText(mail.getMsg());
 			// Set the send timestamp in the mail object
 			mail.setTimestamp(sendDate);
-			msg.setText(mail.getMsg());
 			Transport.send(msg);
 			log.info("Mail sent successfully!");
 			log.info("Send time: " + mail.getTimestamp());
-			
+			log.info(mail.toString());			
 		} catch (MessagingException mex) {
+			// here we need more logging
 			System.out.println(mex);
 		}
 	}

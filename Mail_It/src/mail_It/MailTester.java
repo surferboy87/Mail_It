@@ -11,7 +11,7 @@ public class MailTester {
 		 */
 		
 //		Mail mail_1 = new Mail("rap.huber@bluewin.ch", "rhuber computer-coach.ch", "Test Subject", "Testmsg", 0);
-		Mail mail_2 = new Mail("rap.huber@bluewin.ch", "rap.huber@bluewin.ch, huber3@bfh.ch", "Test Subject", "Testmsg", 0);
+		Mail mail_2 = new Mail("rap.huber@bluewin.ch", "rap.huber@bluewin.ch", "Test Subject", "Testmsg äöüèéà", 0);
 		
 		/*
 		 * The next two line are an output of the mail.
@@ -28,10 +28,10 @@ public class MailTester {
 		
 		MyProperties props = new MyProperties();
 		//props.setSMTPprop("mail_it@bluewin.ch", "smtpauth.bluewin.ch", "587");
-		props.setSMTPSprop("mail_it@bluewin.ch", "smtpauths.bluewin.ch", "465");
-		
-		Mailer mailer = new Mailer();
-		mailer.sendMail(mail_2, props);
+//		props.setSMTPSprop("mail_it@bluewin.ch", "smtpauths.bluewin.ch", "465");
+//		
+//		Mailer mailer = new Mailer();
+//		mailer.sendMail(mail_2, props);
 	}
 
 }

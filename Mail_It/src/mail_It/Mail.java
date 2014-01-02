@@ -1,5 +1,6 @@
 package mail_It;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.mail.internet.AddressException;
@@ -18,6 +19,8 @@ public class Mail {
 	private String msg;
 	private Date timestamp;
 	private int smtpServer;
+	private int priority;
+	private SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss, dd.MM.yy");
 	
 	/**
 	 * Creates a Mail-Object<p>
@@ -66,7 +69,7 @@ public class Mail {
 		out += "Subject:\t" + subject + "\n";
 		out += "Message:\t" + msg + "\n";
 		if(timestamp != null){
-			out += "Send date:\t" + timestamp + "\n";
+			out += "Send date:\t" + getTimestamp() + "\n";
 		} else {
 			out += "Send date:\tNot sended yet\n";
 		}
@@ -140,8 +143,8 @@ public class Mail {
 	/**
 	 * @return the timestamp
 	 */
-	public Date getTimestamp() {
-		return timestamp;
+	public String getTimestamp() {
+		return sdf.format(timestamp);
 	}
 
 	/**
@@ -163,6 +166,27 @@ public class Mail {
 	 */
 	public void setSmtpServer(int smtpServer) {
 		this.smtpServer = smtpServer;
+	}
+
+	/**
+	 * @return the priority of a mail:<br>
+	 *	 1 = high<br>
+	 *	 3 = medium<br>
+	 *	 5 = low
+	 */
+	public int getPriority() {
+		return priority;
+	}
+
+	/**
+	 * Set the priority of the mail to:<p>
+	 * 1 = high<br>
+	 * 3 = medium<br>
+	 * 5 = low
+	 * @param priority the priority to set
+	 */
+	public void setPriority(int priority) {
+		this.priority = priority;
 	}
 	
 	
