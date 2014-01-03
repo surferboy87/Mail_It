@@ -64,11 +64,14 @@ public class Mail_It_Controller {
 
     @FXML // fx:id="toLab"
     private Label toLab; // Value injected by FXMLLoader
+    
+    private Mail mail = new Mail();
+    private Mailer mailer = new Mailer();
 
 
-    // Handler for ComboBox[fx:id="prioBut"] onAction
+ // Handler for ComboBox[fx:id="prioBut"] onMouseClicked
     @FXML
-    void changePrio(ActionEvent event) {
+    void changePrio(MouseEvent event) {
         // handle the event here
     }
 
@@ -76,7 +79,7 @@ public class Mail_It_Controller {
     @FXML
     void close(ActionEvent event) {
         // handle the event here
-    	log.info("The window will close know");
+    	log.info("The window was closed in case you used the quit function");
     	System.exit(0);
     }
 
@@ -84,6 +87,12 @@ public class Mail_It_Controller {
     @FXML
     void logToggle(MouseEvent event) {
         // handle the event here
+    		mailer.setLogOn(logBut.isSelected());
+    		if(logBut.isSelected()){
+    			log.info("Loggin is activated");
+    		} else {
+    			log.info("Loggin is deactivated");
+    		}
     }
 
     // Handler for MenuItem[javafx.scene.control.MenuItem@90a1a9a] onAction

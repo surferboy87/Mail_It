@@ -22,6 +22,8 @@ public class Mail {
 	private int priority;
 	private SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss, dd.MM.yy");
 	
+	public Mail(){}
+	
 	/**
 	 * Creates a Mail-Object<p>
 	 * The <code>to</code> parameter can handle one or more mail addresses. Enter comma separated 

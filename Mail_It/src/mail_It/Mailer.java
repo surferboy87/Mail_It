@@ -16,6 +16,7 @@ import org.apache.log4j.Logger;
 public class Mailer {
 	
 	static Logger log = LogManager.getLogger(LogManager.class.getName());
+	private boolean isLogOn = true;
 
 	public Mailer(){}
 	
@@ -38,7 +39,7 @@ public class Mailer {
 		Session session = Session.getInstance(props.getSMTPsProp(), auth);
 		
 		// Set it to false for less information
-		session.setDebug(true);
+		session.setDebug(isLogOn);
 
 		try {
 			Message msg = new MimeMessage(session);
@@ -59,6 +60,10 @@ public class Mailer {
 			// here we need more logging
 			System.out.println(mex);
 		}
+	}
+	
+	public void setLogOn(boolean log){
+		this.isLogOn = log;
 	}
 	
 	/**
