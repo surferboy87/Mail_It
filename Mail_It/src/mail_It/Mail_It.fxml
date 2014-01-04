@@ -15,12 +15,18 @@
       <menus>
         <Menu mnemonicParsing="false" text="File">
           <items>
-            <MenuItem mnemonicParsing="false" onAction="#close" text="Close" />
+            <MenuItem mnemonicParsing="false" onAction="#close" text="Close" fx:id="close" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Edit">
           <items>
-            <MenuItem mnemonicParsing="false" onAction="#selectLang" text="Language..." />
+            <Menu mnemonicParsing="false" text="Language..." fx:id="selectLang">
+              <items>
+                <CheckMenuItem mnemonicParsing="false" onAction="#changeLang" selected="true" text="German" fx:id="germanLang" />
+                <CheckMenuItem mnemonicParsing="false" onAction="#changeLang" text="French" fx:id="frenchLang" />
+                <CheckMenuItem mnemonicParsing="false" onAction="#changeLang" text="English" fx:id="englLang" />
+              </items>
+            </Menu>
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Help">
@@ -96,15 +102,13 @@
             <Label id="subject" fx:id="subLab" text="Subject:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
             <HBox alignment="CENTER_RIGHT" prefHeight="31.0" prefWidth="780.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
               <children>
-                <ComboBox fx:id="prioBut" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#changePrio" prefHeight="25.0" prefWidth="80.0" promptText="Priority" visibleRowCount="3">
+                <MenuButton fx:id="prio" alignment="CENTER" contentDisplay="LEFT" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Priority">
                   <items>
-                    <FXCollections fx:factory="observableArrayList">
-                      <String fx:value="Item 1" />
-                      <String fx:value="Item 2" />
-                      <String fx:value="Item 3" />
-                    </FXCollections>
+                    <MenuItem mnemonicParsing="false" onAction="#changePrio" text="!! High" fx:id="highPrio" />
+                    <MenuItem mnemonicParsing="false" onAction="#changePrio" text="! Normal" fx:id="normPrio" />
+                    <MenuItem mnemonicParsing="false" onAction="#changePrio" text="- Low" fx:id="lowPrio" />
                   </items>
-                </ComboBox>
+                </MenuButton>
                 <ToggleButton fx:id="logBut" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#logToggle" prefHeight="25.0" prefWidth="80.0" text="Logging" />
               </children>
               <padding>

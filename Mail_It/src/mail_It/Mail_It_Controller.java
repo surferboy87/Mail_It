@@ -11,8 +11,11 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
@@ -26,29 +29,54 @@ public class Mail_It_Controller {
 	
 	static Logger log = LogManager.getLogger(LogManager.class.getName());
 
+
     @FXML // ResourceBundle that was given to the FXMLLoader
     private ResourceBundle resources;
 
     @FXML // URL location of the FXML file that was given to the FXMLLoader
     private URL location;
+    
+    @FXML // fx:id="close"
+    private MenuItem close; // Value injected by FXMLLoader
+    
+    @FXML // fx:id="selectLang"
+    private Menu selectLang; // Value injected by FXMLLoader
+    
+    @FXML // fx:id="germanLang"
+    private CheckMenuItem germanLang; // Value injected by FXMLLoader
+    
+    @FXML // fx:id="englLang"
+    private CheckMenuItem englLang; // Value injected by FXMLLoader
+
+    @FXML // fx:id="frenchLang"
+    private CheckMenuItem frenchLang; // Value injected by FXMLLoader
 
     @FXML // fx:id="fromAdr"
     private TextField fromAdr; // Value injected by FXMLLoader
 
     @FXML // fx:id="fromLab"
     private Label fromLab; // Value injected by FXMLLoader
+    
+    @FXML // fx:id="highPrio"
+    private MenuItem highPrio; // Value injected by FXMLLoader
 
     @FXML // fx:id="logBut"
     private ToggleButton logBut; // Value injected by FXMLLoader
 
     @FXML // fx:id="logText"
-    private TextArea logText; // Value injected by FXMLLoader
+    public static TextArea logText; // Value injected by FXMLLoader
+    
+    @FXML // fx:id="lowPrio"
+    private MenuItem lowPrio; // Value injected by FXMLLoader
 
     @FXML // fx:id="msgText"
     private TextArea msgText; // Value injected by FXMLLoader
-
-    @FXML // fx:id="prioBut"
-    private ComboBox<?> prioBut; // Value injected by FXMLLoader
+    
+    @FXML // fx:id="normPrio"
+    private MenuItem normPrio; // Value injected by FXMLLoader
+    
+    @FXML // fx:id="prio"
+    private MenuButton prio; // Value injected by FXMLLoader
 
     @FXML // fx:id="sendBut"
     private Button sendBut; // Value injected by FXMLLoader
@@ -67,15 +95,41 @@ public class Mail_It_Controller {
     
     private Mail mail = new Mail();
     private Mailer mailer = new Mailer();
+    private MyProperties props = new MyProperties();
 
 
- // Handler for ComboBox[fx:id="prioBut"] onMouseClicked
+    
+ // Handler for CheckMenuItem[fx:id="englLang"] onAction
+    // Handler for CheckMenuItem[fx:id="frenchLang"] onAction
+    // Handler for CheckMenuItem[fx:id="germanLang"] onAction
     @FXML
-    void changePrio(MouseEvent event) {
+    void changeLang(ActionEvent event) {
         // handle the event here
     }
+    
+    
+    // Handler for MenuItem[fx:id="highPrio"] onAction
+    // Handler for MenuItem[fx:id="lowPrio"] onAction
+    // Handler for MenuItem[fx:id="normPrio"] onAction
+    @FXML
+    void changePrio(ActionEvent event) {
+        // handle the event here
+    	if(event.getSource() == highPrio){
+    		mail.setPriority("1");
+    		log.info("The priority of the mail changed to high");
+    		prio.setText(highPrio.getText());
+    	} else if(event.getSource() == normPrio){
+    		mail.setPriority("3");
+    		log.info("The priority of the mail changed to normal");
+    		prio.setText(normPrio.getText());
+    	} else if(event.getSource() == lowPrio){
+    		mail.setPriority("5");
+    		log.info("The priority of the mail changed to low");
+    		prio.setText(lowPrio.getText());
+    	}
+    }
 
-    // Handler for MenuItem[javafx.scene.control.MenuItem@4b3669e1] onAction
+    // Handler for MenuItem[fx:id="close"] onAction
     @FXML
     void close(ActionEvent event) {
         // handle the event here
@@ -105,6 +159,12 @@ public class Mail_It_Controller {
     @FXML
     void sendMail(MouseEvent event) {
         // handle the event here
+    	props.setSMTPprop("mail_it@bluewin.ch", "smtpauth.bluewin.ch", "587");
+    	mail.setFrom(fromAdr.getText());
+    	mail.setAddressee(toAdr.getText());
+    	mail.setSubject(subText.getText());
+    	mail.setMsg(msgText.getText());
+    	mailer.sendMail(mail, props);
     }
 
     // Handler for MenuItem[javafx.scene.control.MenuItem@1cda50e6] onAction

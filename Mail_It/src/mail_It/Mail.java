@@ -19,7 +19,7 @@ public class Mail {
 	private String msg;
 	private Date timestamp;
 	private int smtpServer;
-	private int priority;
+	private String priority;
 	private SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss, dd.MM.yy");
 	
 	public Mail(){}
@@ -176,7 +176,7 @@ public class Mail {
 	 *	 3 = medium<br>
 	 *	 5 = low
 	 */
-	public int getPriority() {
+	public String getPriority() {
 		return priority;
 	}
 
@@ -187,7 +187,7 @@ public class Mail {
 	 * 5 = low
 	 * @param priority the priority to set
 	 */
-	public void setPriority(int priority) {
+	public void setPriority(String priority) {
 		this.priority = priority;
 	}
 	

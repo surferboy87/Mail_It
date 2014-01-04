@@ -1,5 +1,7 @@
 package mail_It;
 
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.util.Date;
 
 import javax.mail.Authenticator;
@@ -17,6 +19,8 @@ public class Mailer {
 	
 	static Logger log = LogManager.getLogger(LogManager.class.getName());
 	private boolean isLogOn = true;
+	private int priority = 3; //normal
+	private String str;
 
 	public Mailer(){}
 	
@@ -44,9 +48,11 @@ public class Mailer {
 		try {
 			Message msg = new MimeMessage(session);
 			// Set message attributes
+			
 			msg.setFrom(mail.getFrom());
 			msg.addRecipients(Message.RecipientType.TO, mail.getAddressee());
 			msg.setSubject(mail.getSubject());
+			msg.addHeader("X-Priority", mail.getPriority());
 			Date sendDate = new Date();
 			msg.setSentDate(sendDate);
 			msg.setText(mail.getMsg());
@@ -55,7 +61,7 @@ public class Mailer {
 			Transport.send(msg);
 			log.info("Mail sent successfully!");
 			log.info("Send time: " + mail.getTimestamp());
-			log.info(mail.toString());			
+			log.info(mail.toString());
 		} catch (MessagingException mex) {
 			// here we need more logging
 			System.out.println(mex);
