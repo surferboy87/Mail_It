@@ -21,11 +21,11 @@ public class MyTextAreaAppender extends AppenderSkeleton {
 	 */
 	public void append(LoggingEvent loggingEvent) {
 		String message = this.layout.format(loggingEvent);
+		Mail_It_Controller.logText.setText(message);
 	}
 
 	@Override
 	public void close() {
-		// TODO Auto-generated method stub
 		if (this.closed) {
 		    return;
 		}

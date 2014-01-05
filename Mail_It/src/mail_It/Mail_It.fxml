@@ -72,7 +72,7 @@
       <center>
         <TextArea fx:id="msgText" prefHeight="227.0" prefWidth="694.0" wrapText="true">
           <tooltip>
-            <Tooltip maxWidth="250.0" minWidth="150.0" prefHeight="-1.0" prefWidth="200.0" text="Enter here your message for the adressee" wrapText="true" />
+            <Tooltip maxWidth="250.0" minWidth="150.0" prefHeight="-1.0" prefWidth="200.0" text="Enter here your message" wrapText="true" />
           </tooltip>
         </TextArea>
       </center>
@@ -89,12 +89,12 @@
             </TextField>
             <TextField fx:id="toAdr" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
               <tooltip>
-                <Tooltip autoFix="true" consumeAutoHidingEvents="true" maxHeight="-1.0" maxWidth="250.0" minWidth="150.0" prefHeight="-1.0" prefWidth="200.0" text="Enter a valid mail address. You can enter more addresses if you seperate them with a comma." wrapText="true" />
+                <Tooltip autoFix="true" consumeAutoHidingEvents="true" maxHeight="-1.0" maxWidth="250.0" minWidth="150.0" prefHeight="-1.0" prefWidth="200.0" text="Enter at least one valid mail address. You can enter more addresses if you seperate them with a comma." wrapText="true" />
               </tooltip>
             </TextField>
             <TextField id="subjectText" fx:id="subText" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
               <tooltip>
-                <Tooltip maxWidth="-1.0" prefHeight="-1.0" prefWidth="150.0" text="Enter a subject." wrapText="true" />
+                <Tooltip maxWidth="-1.0" prefHeight="-1.0" prefWidth="150.0" text="Enter a subject/title" wrapText="true" />
               </tooltip>
             </TextField>
             <Label id="from" fx:id="fromLab" text="From:" GridPane.columnIndex="0" GridPane.rowIndex="0" />

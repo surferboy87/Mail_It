@@ -32,6 +32,7 @@ public class MailTester {
 		
 		Mailer mailer = new Mailer();
 		mailer.sendMail(mail_2, props);
+		
 	}
 
 }
