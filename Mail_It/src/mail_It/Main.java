@@ -1,18 +1,19 @@
 package mail_It;
 	
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 
 public class Main extends Application {
+	
+	static Logger log = LogManager.getLogger(LogManager.class.getName());
+	
 	@Override
 	public void start(Stage primaryStage) {
 		try {
@@ -23,18 +24,14 @@ public class Main extends Application {
 			primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();
+			log.error(e.getMessage());
 		}
 	}
 	
-	static Logger log = LogManager.getLogger(LogManager.class.getName());
+	
 	
 	public static void main(String[] args) {
 		launch(args);
-		log.trace("Trace Message!");
-		log.debug("Debug Message!");
-		log.info("Info Message!");
-		log.warn("Warn Message!");
-		log.error("Error Message!");
-		log.fatal("Fatal Message!");
+		
 	}
 }

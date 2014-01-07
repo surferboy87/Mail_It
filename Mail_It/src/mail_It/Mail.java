@@ -63,13 +63,13 @@ public class Mail {
 		out += "To:";
 		if(addressee != null){
 			for(InternetAddress address : addressee){
-				out += "\t\t" + address.toString() + "\n";
+				out += "\t\t\t" + address.toString() + "\n";
 			}
 		} else {
-			out += "\t\tundefined\n";
+			out += "\t\t\tundefined\n";
 		}
-		out += "Subject:\t" + subject + "\n";
-		out += "Message:\t" + msg + "\n";
+		out += "Subject:\t\t" + subject + "\n";
+		out += "Message:\t\t" + msg + "\n";
 		if(timestamp != null){
 			out += "Send date:\t" + getTimestamp() + "\n";
 		} else {

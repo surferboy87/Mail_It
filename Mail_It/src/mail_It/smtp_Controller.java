@@ -4,16 +4,11 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 
@@ -69,15 +64,11 @@ public class smtp_Controller {
  	// Handler for Button[fx:id="okBut"] onMouseClicked
  	@FXML
  	void ok(MouseEvent event) {
+ 	
  		MyProperties.setSMTPprop(username.getText(), password.getText(),
  				smtp.getText(), port.getText());
- 		//Stage stage = (Stage) okBut.getScene().getWindow();
- 		//stage.close();
- 	}
- 	
- 	public void setRes(ResourceBundle rb){
- 		this.resources = rb;
- 		System.out.println(resources.getString("cancel"));
+ 		Stage stage = (Stage) okBut.getScene().getWindow();
+ 		stage.close();
  	}
   
 

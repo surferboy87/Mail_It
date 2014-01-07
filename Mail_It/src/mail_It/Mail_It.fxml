@@ -27,11 +27,7 @@
                 <CheckMenuItem mnemonicParsing="false" onAction="#changeLang" text="English" fx:id="englLang" />
               </items>
             </Menu>
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Help" fx:id="help">
-          <items>
-            <MenuItem mnemonicParsing="false" onAction="#showAbout" text="About" fx:id="about" />
+            <MenuItem mnemonicParsing="false" onAction="#showSMTPDiag" text="SMTP Settings" fx:id="smptSettings" />
           </items>
         </Menu>
       </menus>

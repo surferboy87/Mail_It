@@ -9,10 +9,6 @@ import java.net.URL;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-import javax.mail.MessagingException;
-import javax.mail.SendFailedException;
-import javax.mail.internet.AddressException;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,20 +19,20 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
-import javafx.stage.Popup;
 import javafx.stage.Stage;
+
+import javax.mail.MessagingException;
+import javax.mail.SendFailedException;
+import javax.mail.internet.AddressException;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-
-import com.sun.glass.ui.Window;
 
 
 public class Mail_It_Controller {
@@ -50,10 +46,7 @@ public class Mail_It_Controller {
 
     @FXML // URL location of the FXML file that was given to the FXMLLoader
     private URL location;
-    
-    @FXML // fx:id="about"
-    private MenuItem about; // Value injected by FXMLLoader
-    
+        
     @FXML // fx:id="close"
     private MenuItem close; // Value injected by FXMLLoader
     
@@ -81,8 +74,6 @@ public class Mail_It_Controller {
     @FXML // fx:id="fromLab"
     private Label fromLab; // Value injected by FXMLLoader
     
-    @FXML // fx:id="help"
-    private Menu help; // Value injected by FXMLLoader
     
     @FXML // fx:id="highPrio"
     private MenuItem highPrio; // Value injected by FXMLLoader
@@ -107,6 +98,9 @@ public class Mail_It_Controller {
 
     @FXML // fx:id="sendBut"
     private Button sendBut; // Value injected by FXMLLoader
+    
+    @FXML // fx:id="smptSettings"
+    private MenuItem smptSettings; // Value injected by FXMLLoader
 
     @FXML // fx:id="subLab"
     private Label subLab; // Value injected by FXMLLoader
@@ -123,7 +117,6 @@ public class Mail_It_Controller {
     
     private Mail mail = new Mail();
     private Mailer mailer = new Mailer();
-//    private smtp_Controller smtpControl = new smtp_Controller();
     
     // Handler for CheckMenuItem[fx:id="englLang"] onAction
     // Handler for CheckMenuItem[fx:id="frenchLang"] onAction
@@ -170,8 +163,7 @@ public class Mail_It_Controller {
     	this.germanLang.setText(rb.getString("german"));
     	this.frenchLang.setText(rb.getString("french"));
     	this.englLang.setText(rb.getString("english"));
-    	this.help.setText(rb.getString("help"));
-    	this.about.setText(rb.getString("about"));
+    	this.smptSettings.setText(rb.getString("smtpSettings"));
     	this.fromLab.setText(rb.getString("from"));
     	this.fromAdr.getTooltip().setText(rb.getString("fromTip"));
     	this.toLab.setText(rb.getString("to"));
@@ -241,7 +233,7 @@ public class Mail_It_Controller {
     void sendMail(MouseEvent event){
         // handle the event here
     	logText.appendText("############################################################\n");
-    	logText.appendText("Trying to send the Mail...");
+    	logText.appendText("Trying to send the Mail...\n");
     	log.info("Trying to send the Mail...");
     	try {
     	mail.setFrom(fromAdr.getText());
@@ -249,34 +241,48 @@ public class Mail_It_Controller {
 		mail.setSubject(subText.getText());
 		mail.setMsg(msgText.getText());
 		mailer.sendMail(mail, MyProperties.getSMTPsProp());
+		logText.appendText("Mail send succesfully\n");
+    	logText.appendText(mail.toString());
+    	logText.appendText("############################################################\n\n");
+    	log.info("Mail send succesfully");
+    	log.info("\n" + mail.toString());
     	}
     	catch (AddressException addEx){
-    		System.out.println("adresse falsch");
+    		logText.appendText("The address " + addEx.getRef() + "is not valid: " + addEx.getMessage());
+    		log.error("The address " + addEx.getRef() + "is not valid: " + addEx.getCause());
     	}
     	catch (SendFailedException sendEx){
+    		logText.appendText("There was going something wrong. Try it again\n");
+    		log.error("There was going something wrong: " + sendEx.getCause());
     		
     	}
     	catch (MessagingException mesEx){
-    		
+    		logText.appendText(mesEx.getMessage() + "\n");
+    		log.error(mesEx.getMessage());
     	}
+    	
+    }
+    
+ // Handler for MenuItem[fx:id="smptSettings"] onAction
+    @FXML
+    void showSMTPDiag(ActionEvent event) {
+    	try {
+    		BorderPane root = (BorderPane) FXMLLoader.load(getClass().getResource("smtp_mail_it.fxml"));	
+    		Scene secondScene = new Scene(root);
+			secondScene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			Stage secondStage = new Stage();
+			secondStage.setScene(secondScene);
+			secondStage.initModality(Modality.APPLICATION_MODAL);
+			secondStage.show();
+		} catch (Exception e) {
+			log.error("The secondeStage smtpSettings could not created");
+			e.printStackTrace();
+		}
     }
 
     // Handler for MenuItem[javafx.scene.control.MenuItem@1cda50e6] onAction
     @FXML
     void showAbout(ActionEvent event) {
-        // handle the event here
-    	try {
- 			// Load the fxml file and create a new stage for the smtp settings
- 			BorderPane root = (BorderPane) FXMLLoader.load(getClass().getResource("smtp_mail_it.fxml"));
- 			Scene secondScene = new Scene(root);
- 			secondScene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
- 			Stage secondStage = new Stage();
- 			secondStage.setScene(secondScene);
- 			secondStage.initModality(Modality.APPLICATION_MODAL);
- 			secondStage.show();
- 		} catch (Exception e) {
- 			e.printStackTrace();
- 		}
     	
     }
     
