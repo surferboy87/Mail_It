@@ -16,7 +16,7 @@ public class MailTester {
 //		Mail mail_1 = new Mail("rap.huber@bluewin.ch", "rhuber computer-coach.ch", "Test Subject", "Testmsg");
 		Mail mail_2 = new Mail();
 		try {
-			mail_2 = new Mail("rap.huber@bluewin.ch", "rap.huber@bluewin.ch", "Test Subject", "Testmsg äöüèéà");
+			mail_2 = new Mail("mail_it@bluewin.ch", "rap.huber@bluewin.ch", "Test Subject", "Testmsg äöüèéà");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

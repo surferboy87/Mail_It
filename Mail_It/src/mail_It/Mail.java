@@ -3,6 +3,7 @@ package mail_It;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.mail.Address;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 
@@ -14,7 +15,7 @@ public class Mail {
 	static Logger log = LogManager.getLogger(LogManager.class.getName());
 	
 	private InternetAddress from;
-	private InternetAddress[] addressee;
+	private Address[] addressee;
 	private String subject;
 	private String msg;
 	private Date timestamp;
@@ -62,7 +63,7 @@ public class Mail {
 		out += "From:\t\t" + getFrom().toString() + "\n";
 		out += "To:";
 		if(addressee != null){
-			for(InternetAddress address : addressee){
+			for(Address address : addressee){
 				out += "\t\t\t" + address.toString() + "\n";
 			}
 		} else {
@@ -95,7 +96,7 @@ public class Mail {
 	/**
 	 * @return the addressee
 	 */
-	public InternetAddress[] getAddressee() {
+	public Address[] getAddressee() {
 		return addressee;
 	}
 

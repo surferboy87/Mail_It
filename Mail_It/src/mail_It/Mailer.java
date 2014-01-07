@@ -45,6 +45,7 @@ public class Mailer {
 		// Set it to false for less information
 		session.setDebug(isLogOn);
 		
+		
 		Message msg = new MimeMessage(session);
 		// Set message attributes
 		msg.setFrom(mail.getFrom());
