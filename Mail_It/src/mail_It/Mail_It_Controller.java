@@ -181,7 +181,7 @@ public class Mail_It_Controller {
     	this.logBut.setText(rb.getString("logging"));
     	this.msgText.getTooltip().setText(rb.getString("msgTip"));
     	this.sendBut.setText(rb.getString("send"));
-    	smtpControl.changeLang();
+//    	smtpControl.changeLang();
     	
     }
     
