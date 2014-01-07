@@ -123,7 +123,7 @@ public class Mail_It_Controller {
     
     private Mail mail = new Mail();
     private Mailer mailer = new Mailer();
-    private smtp_Controller smtpControl = new smtp_Controller();
+//    private smtp_Controller smtpControl = new smtp_Controller();
     
     // Handler for CheckMenuItem[fx:id="englLang"] onAction
     // Handler for CheckMenuItem[fx:id="frenchLang"] onAction
@@ -238,25 +238,46 @@ public class Mail_It_Controller {
 
     // Handler for Button[fx:id="sendBut"] onMouseClicked
     @FXML
-    void sendMail(MouseEvent event) throws AddressException, SendFailedException, MessagingException {
+    void sendMail(MouseEvent event){
         // handle the event here
     	logText.appendText("############################################################\n");
     	logText.appendText("Trying to send the Mail...");
     	log.info("Trying to send the Mail...");
+    	try {
     	mail.setFrom(fromAdr.getText());
 		mail.setAddressee(toAdr.getText());
 		mail.setSubject(subText.getText());
 		mail.setMsg(msgText.getText());
 		mailer.sendMail(mail, MyProperties.getSMTPsProp());
+    	}
+    	catch (AddressException addEx){
+    		System.out.println("adresse falsch");
+    	}
+    	catch (SendFailedException sendEx){
+    		
+    	}
+    	catch (MessagingException mesEx){
+    		
+    	}
     }
 
     // Handler for MenuItem[javafx.scene.control.MenuItem@1cda50e6] onAction
     @FXML
     void showAbout(ActionEvent event) {
         // handle the event here
-    	System.out.println(resources.getString("cancel"));
-    	smtpControl.setRes(resources);
-    	smtpControl.createSMTPStage();
+    	try {
+ 			// Load the fxml file and create a new stage for the smtp settings
+ 			BorderPane root = (BorderPane) FXMLLoader.load(getClass().getResource("smtp_mail_it.fxml"));
+ 			Scene secondScene = new Scene(root);
+ 			secondScene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+ 			Stage secondStage = new Stage();
+ 			secondStage.setScene(secondScene);
+ 			secondStage.initModality(Modality.APPLICATION_MODAL);
+ 			secondStage.show();
+ 		} catch (Exception e) {
+ 			e.printStackTrace();
+ 		}
+    	
     }
     
     // This method is called by the FXMLLoader when initialization is complete

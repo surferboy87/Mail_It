@@ -75,42 +75,9 @@ public class smtp_Controller {
  		//stage.close();
  	}
  	
- 	private void changeLang(){
- 		try{
- 			System.out.println("im here");
- 			System.out.println(resources.getString("cancel"));
- 			//okBut.setText("hallo");
- 		}
- 		catch (Exception e){
- 			e.printStackTrace();
- 		}
- 	 }
- 	
  	public void setRes(ResourceBundle rb){
  		this.resources = rb;
  		System.out.println(resources.getString("cancel"));
- 	}
- 	
-// 	 @FXML
-//     void initialize() {
-//         changeLang();
-//
-//     }
-
-
- 	public void createSMTPStage() {
- 		try {
- 			// Load the fxml file and create a new stage for the smtp settings
- 			BorderPane root = (BorderPane) FXMLLoader.load(getClass().getResource("smtp_mail_it.fxml"));
- 			Scene secondScene = new Scene(root);
- 			secondScene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
- 			Stage secondStage = new Stage();
- 			secondStage.setScene(secondScene);
- 			secondStage.initModality(Modality.APPLICATION_MODAL);
- 			secondStage.show();
- 		} catch (Exception e) {
- 			e.printStackTrace();
- 		}
  	}
   
 
