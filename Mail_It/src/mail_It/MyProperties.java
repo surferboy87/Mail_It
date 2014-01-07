@@ -2,9 +2,9 @@ package mail_It;
 
 import java.util.Properties;
 
-public class MyProperties extends Properties {
+public class MyProperties {
 	
-	private Properties props = new Properties();
+	private static Properties props = new Properties();
 	
 	// unused constructor
 	public MyProperties(){}
@@ -15,8 +15,9 @@ public class MyProperties extends Properties {
 	 * @param host a smtp-server e.g. smtp.bluewin.ch
 	 * @param port the port number of the smtp-server
 	 */
-	public void setSMTPprop(String user, String host, String port){
+	public static void setSMTPprop(String user, String password, String host, String port){
 		props.put("mail.smtp.user", user);
+		props.put("mail.smtp.password", password);
 		props.put("mail.smtp.host", host);
 		props.put("mail.smtp.port", port);
 		props.put("mail.smtp.debug", "true");
@@ -32,7 +33,7 @@ public class MyProperties extends Properties {
 	 * @param port the port number of the smtp-server
 	 */
 	// Do not know if everything is right, but works
-	public void setSMTPSprop(String user, String host, String port){
+	public static void setSMTPSprop(String user, String host, String port){
 		props.setProperty("mail.transport.protocol", "smtps");
 		props.setProperty("mail.smtp.host", host);
 		props.setProperty("mail.smtp.user", user);
@@ -50,8 +51,8 @@ public class MyProperties extends Properties {
 	 * 
 	 * @return SMTP(S) properties 
 	 */
-	public Properties getSMTPsProp(){
-		return this.props;
+	public static Properties getSMTPsProp(){
+		return props;
 	}
 	
 }

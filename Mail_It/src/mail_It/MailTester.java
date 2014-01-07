@@ -25,13 +25,12 @@ public class MailTester {
 		 * With MyProperties we set the parameters for the SMTP-connection
 		 * We create a new mailer and call sendMail with the mail_2 and the smtp-properties
 		 */
-		
-		MyProperties props = new MyProperties();
-		//props.setSMTPprop("mail_it@bluewin.ch", "smtpauth.bluewin.ch", "587");
-		props.setSMTPSprop("mail_it@bluewin.ch", "smtpauths.bluewin.ch", "465");
+	
+		//MyProperties.setSMTPprop("mail_it@bluewin.ch", "smtpauth.bluewin.ch", "587");
+		MyProperties.setSMTPSprop("mail_it@bluewin.ch", "smtpauths.bluewin.ch", "465");
 		
 		Mailer mailer = new Mailer();
-		mailer.sendMail(mail_2, props);
+		mailer.sendMail(mail_2, MyProperties.getSMTPsProp());
 		
 	}
 

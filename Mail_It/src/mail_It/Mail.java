@@ -19,7 +19,7 @@ public class Mail {
 	private String msg;
 	private Date timestamp;
 	private int smtpServer;
-	private String priority;
+	private String priority = "3"; //normal
 	private SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss, dd.MM.yy");
 	
 	public Mail(){}

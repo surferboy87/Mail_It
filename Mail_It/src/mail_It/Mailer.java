@@ -1,8 +1,7 @@
 package mail_It;
 
-import java.io.OutputStream;
-import java.io.PrintStream;
 import java.util.Date;
+import java.util.Properties;
 
 import javax.mail.Authenticator;
 import javax.mail.Message;
@@ -18,9 +17,7 @@ import org.apache.log4j.Logger;
 public class Mailer {
 	
 	static Logger log = LogManager.getLogger(LogManager.class.getName());
-	private boolean isLogOn = true;
-	private int priority = 3; //normal
-	private String str;
+	private boolean isLogOn = false;
 
 	public Mailer(){}
 	
@@ -33,14 +30,16 @@ public class Mailer {
 	 * @exception MessagingException if something didn't work
 	 * @see Mail
 	 */
-	public void sendMail(Mail mail, MyProperties props){
+	public void sendMail(Mail mail, Properties props){
 		
 		/* 
 		 * For more information look further down
 		 */
-		Authenticator auth = new SMTPAuthenticator();
+		Authenticator auth = new SMTPAuthenticator(props.getProperty("mail.smtp.user"),
+				props.getProperty("mail.smtp.password"));
+		
 		// We set up a session with the defined properties before
-		Session session = Session.getInstance(props.getSMTPsProp(), auth);
+		Session session = Session.getInstance(props, auth);
 		
 		// Set it to false for less information
 		session.setDebug(isLogOn);
@@ -48,7 +47,6 @@ public class Mailer {
 		try {
 			Message msg = new MimeMessage(session);
 			// Set message attributes
-			
 			msg.setFrom(mail.getFrom());
 			msg.addRecipients(Message.RecipientType.TO, mail.getAddressee());
 			msg.setSubject(mail.getSubject());
@@ -80,10 +78,16 @@ public class Mailer {
 	 *
 	 */
 	private class SMTPAuthenticator extends javax.mail.Authenticator {
+		String username;
+		String password;
+		
+		public SMTPAuthenticator(String user, String pass){
+			this.username = user;
+			this.password = pass;
+		}
+		
 		public PasswordAuthentication getPasswordAuthentication(){
-			String username = "mail_it@bluewin.ch";
-			String password = "java_mail";
-			return new PasswordAuthentication(username, password);
+			return new PasswordAuthentication(this.username, this.password);
 			}
 		}
 }

@@ -13,12 +13,12 @@
   <children>
     <MenuBar useSystemMenuBar="false" VBox.vgrow="NEVER">
       <menus>
-        <Menu mnemonicParsing="false" text="File">
+        <Menu mnemonicParsing="false" text="File" fx:id="file">
           <items>
             <MenuItem mnemonicParsing="false" onAction="#close" text="Close" fx:id="close" />
           </items>
         </Menu>
-        <Menu mnemonicParsing="false" text="Edit">
+        <Menu mnemonicParsing="false" text="Edit" fx:id="edit">
           <items>
             <Menu mnemonicParsing="false" text="Language..." fx:id="selectLang">
               <items>
@@ -29,9 +29,9 @@
             </Menu>
           </items>
         </Menu>
-        <Menu mnemonicParsing="false" text="Help">
+        <Menu mnemonicParsing="false" text="Help" fx:id="help">
           <items>
-            <MenuItem mnemonicParsing="false" onAction="#showAbout" text="About" />
+            <MenuItem mnemonicParsing="false" onAction="#showAbout" text="About" fx:id="about" />
           </items>
         </Menu>
       </menus>
