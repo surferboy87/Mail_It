@@ -153,7 +153,7 @@ public class Mail_It_Controller {
     		locale = new Locale("en", "UK");
     		resources = ResourceBundle.getBundle("LangBundle", locale);
     		changeLang(resources);
-    		log.info("Changed the language to french");
+    		log.info("Changed the language to english");
     	}
     	
     }
