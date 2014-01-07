@@ -1,5 +1,8 @@
 package mail_It;
 
+import javax.mail.MessagingException;
+import javax.mail.SendFailedException;
+
 public class MailTester {
 
 	public static void main(String[] args) {
@@ -11,7 +14,7 @@ public class MailTester {
 		 */
 		
 //		Mail mail_1 = new Mail("rap.huber@bluewin.ch", "rhuber computer-coach.ch", "Test Subject", "Testmsg");
-		Mail mail_2;
+		Mail mail_2 = new Mail();
 		try {
 			mail_2 = new Mail("rap.huber@bluewin.ch", "rap.huber@bluewin.ch", "Test Subject", "Testmsg äöüèéà");
 		} catch (Exception e) {
@@ -36,7 +39,15 @@ public class MailTester {
 		MyProperties.setSMTPSprop("mail_it@bluewin.ch", "smtpauths.bluewin.ch", "465");
 		
 		Mailer mailer = new Mailer();
-		mailer.sendMail(mail_2, MyProperties.getSMTPsProp());
+		try {
+			mailer.sendMail(mail_2, MyProperties.getSMTPsProp());
+		} catch (SendFailedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (MessagingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 

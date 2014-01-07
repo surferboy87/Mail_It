@@ -88,13 +88,14 @@ public class smtp_Controller {
  	
  	public void setRes(ResourceBundle rb){
  		this.resources = rb;
+ 		System.out.println(resources.getString("cancel"));
  	}
  	
- 	 @FXML
-     void initialize() {
-         changeLang();
-
-     }
+// 	 @FXML
+//     void initialize() {
+//         changeLang();
+//
+//     }
 
 
  	public void createSMTPStage() {

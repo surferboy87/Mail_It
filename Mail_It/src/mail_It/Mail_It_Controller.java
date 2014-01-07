@@ -254,6 +254,7 @@ public class Mail_It_Controller {
     @FXML
     void showAbout(ActionEvent event) {
         // handle the event here
+    	System.out.println(resources.getString("cancel"));
     	smtpControl.setRes(resources);
     	smtpControl.createSMTPStage();
     }
