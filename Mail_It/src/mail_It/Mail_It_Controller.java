@@ -9,6 +9,10 @@ import java.net.URL;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import javax.mail.MessagingException;
+import javax.mail.SendFailedException;
+import javax.mail.internet.AddressException;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -119,10 +123,7 @@ public class Mail_It_Controller {
     
     private Mail mail = new Mail();
     private Mailer mailer = new Mailer();
-    private MyProperties props = new MyProperties();
     private smtp_Controller smtpControl = new smtp_Controller();
-
-
     
     // Handler for CheckMenuItem[fx:id="englLang"] onAction
     // Handler for CheckMenuItem[fx:id="frenchLang"] onAction
@@ -137,6 +138,7 @@ public class Mail_It_Controller {
     		locale = new Locale("de", "DE");
     		resources = ResourceBundle.getBundle("LangBundle", locale);
     		changeLang(resources);
+    		logText.appendText("Changed the language to german\n");
     		log.info("Changed the language to german");
     	} else if (event.getSource() == frenchLang){
     		germanLang.setSelected(false);
@@ -145,6 +147,7 @@ public class Mail_It_Controller {
     		locale = new Locale("fr", "FR");
     		resources = ResourceBundle.getBundle("LangBundle", locale);
     		changeLang(resources);
+    		logText.appendText("Changed the language to french\n");
     		log.info("Changed the language to french");
     	} else if (event.getSource() == englLang){
     		germanLang.setSelected(false);
@@ -153,6 +156,7 @@ public class Mail_It_Controller {
     		locale = new Locale("en", "UK");
     		resources = ResourceBundle.getBundle("LangBundle", locale);
     		changeLang(resources);
+    		logText.appendText("Changed the language to english\n");
     		log.info("Changed the language to french");
     	}
     	
@@ -181,8 +185,6 @@ public class Mail_It_Controller {
     	this.logBut.setText(rb.getString("logging"));
     	this.msgText.getTooltip().setText(rb.getString("msgTip"));
     	this.sendBut.setText(rb.getString("send"));
-    	smtpControl.changeLang();
-    	
     }
     
     
@@ -194,16 +196,19 @@ public class Mail_It_Controller {
         // handle the event here
     	if(event.getSource() == highPrio){
     		mail.setPriority("1");
+    		logText.appendText("The priority of the mail changed to high\n");
     		log.info("The priority of the mail changed to high");
     		prio.setText(highPrio.getText());
     	} else if(event.getSource() == normPrio){
     		mail.setPriority("3");
-    		log.info("The priority of the mail changed to normal");
     		prio.setText(normPrio.getText());
+    		logText.appendText("The priority of the mail changed to normal\n");
+    		log.info("The priority of the mail changed to normal");
     	} else if(event.getSource() == lowPrio){
     		mail.setPriority("5");
-    		log.info("The priority of the mail changed to low");
     		prio.setText(lowPrio.getText());
+    		logText.appendText("The priority of the mail changed to low\n");
+    		log.info("The priority of the mail changed to low");
     	}
     }
 
@@ -211,7 +216,8 @@ public class Mail_It_Controller {
     @FXML
     void close(ActionEvent event) {
         // handle the event here
-    	log.info("The window was closed in case you used the quit function");
+    	logText.appendText("The windwo will close now\n");
+    	log.info("The window was closed in case the user selected the close item");
     	System.exit(0);
     }
 
@@ -221,8 +227,10 @@ public class Mail_It_Controller {
         // handle the event here
     		mailer.setLogOn(logBut.isSelected());
     		if(logBut.isSelected()){
+    			logText.appendText("Loggin is activated\n");
     			log.info("Loggin is activated");
     		} else {
+    			logText.appendText("Loggin is deactivated\n");
     			log.info("Loggin is deactivated");
     		}
     }
@@ -230,19 +238,23 @@ public class Mail_It_Controller {
 
     // Handler for Button[fx:id="sendBut"] onMouseClicked
     @FXML
-    void sendMail(MouseEvent event) {
+    void sendMail(MouseEvent event) throws AddressException, SendFailedException, MessagingException {
         // handle the event here
+    	logText.appendText("############################################################\n");
+    	logText.appendText("Trying to send the Mail...");
+    	log.info("Trying to send the Mail...");
     	mail.setFrom(fromAdr.getText());
-    	mail.setAddressee(toAdr.getText());
-    	mail.setSubject(subText.getText());
-    	mail.setMsg(msgText.getText());
-    	mailer.sendMail(mail, MyProperties.getSMTPsProp());
+		mail.setAddressee(toAdr.getText());
+		mail.setSubject(subText.getText());
+		mail.setMsg(msgText.getText());
+		mailer.sendMail(mail, MyProperties.getSMTPsProp());
     }
 
     // Handler for MenuItem[javafx.scene.control.MenuItem@1cda50e6] onAction
     @FXML
     void showAbout(ActionEvent event) {
         // handle the event here
+    	smtpControl.setRes(resources);
     	smtpControl.createSMTPStage();
     }
     

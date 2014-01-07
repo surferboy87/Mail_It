@@ -39,7 +39,7 @@ public class Mail {
 	 * 
 	 * @exception AddressException if an address does not follow the RFC822 syntax
 	 */
-	public Mail(String from, String to, String subject, String msg, int smtp){
+	public Mail(String from, String to, String subject, String msg){
 		try {
 			this.from = new InternetAddress(from);
 			this.addressee = InternetAddress.parse(to); // durch Komma getrennt mehrere Empfaenger moeglich
@@ -88,12 +88,8 @@ public class Mail {
 	/**
 	 * @param from the from to set
 	 */
-	public void setFrom(String from) {
-		try {
-			this.from = new InternetAddress(from);
-		} catch (AddressException addEx) {
-			log.warn(addEx.getMessage() + " " + "'" + addEx.getRef() + "'");
-		}
+	public void setFrom(String from) throws AddressException{
+		this.from = new InternetAddress(from);
 	}
 
 	/**
@@ -106,12 +102,8 @@ public class Mail {
 	/**
 	 * @param addressee the addressee to set
 	 */
-	public void setAddressee(String addressee) {
-		try {
-			this.addressee = InternetAddress.parse(addressee);
-		} catch (AddressException addEx) {
-			log.warn(addEx.getMessage() + " " + "'" + addEx.getRef() + "'");
-		}
+	public void setAddressee(String addressee) throws AddressException{
+		this.addressee = InternetAddress.parse(addressee);
 	}
 
 	/**

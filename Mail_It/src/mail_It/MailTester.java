@@ -10,8 +10,14 @@ public class MailTester {
 		 * mail_2:	Is everything OK and have two addressee
 		 */
 		
-//		Mail mail_1 = new Mail("rap.huber@bluewin.ch", "rhuber computer-coach.ch", "Test Subject", "Testmsg", 0);
-		Mail mail_2 = new Mail("rap.huber@bluewin.ch", "rap.huber@bluewin.ch", "Test Subject", "Testmsg äöüèéà", 0);
+//		Mail mail_1 = new Mail("rap.huber@bluewin.ch", "rhuber computer-coach.ch", "Test Subject", "Testmsg");
+		Mail mail_2;
+		try {
+			mail_2 = new Mail("rap.huber@bluewin.ch", "rap.huber@bluewin.ch", "Test Subject", "Testmsg äöüèéà");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		/*
 		 * The next two line are an output of the mail.

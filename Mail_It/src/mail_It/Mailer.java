@@ -7,6 +7,7 @@ import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
+import javax.mail.SendFailedException;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.MimeMessage;
@@ -30,7 +31,7 @@ public class Mailer {
 	 * @exception MessagingException if something didn't work
 	 * @see Mail
 	 */
-	public void sendMail(Mail mail, Properties props){
+	public void sendMail(Mail mail, Properties props) throws SendFailedException, MessagingException {
 		
 		/* 
 		 * For more information look further down
@@ -43,27 +44,23 @@ public class Mailer {
 		
 		// Set it to false for less information
 		session.setDebug(isLogOn);
-
-		try {
-			Message msg = new MimeMessage(session);
-			// Set message attributes
-			msg.setFrom(mail.getFrom());
-			msg.addRecipients(Message.RecipientType.TO, mail.getAddressee());
-			msg.setSubject(mail.getSubject());
-			msg.addHeader("X-Priority", mail.getPriority());
-			Date sendDate = new Date();
-			msg.setSentDate(sendDate);
-			msg.setText(mail.getMsg());
-			// Set the send timestamp in the mail object
-			mail.setTimestamp(sendDate);
-			Transport.send(msg);
-			log.info("Mail sent successfully!");
-			log.info("Send time: " + mail.getTimestamp());
-			log.info(mail.toString());
-		} catch (MessagingException mex) {
-			// here we need more logging
-			System.out.println(mex);
-		}
+		
+		Message msg = new MimeMessage(session);
+		// Set message attributes
+		msg.setFrom(mail.getFrom());
+		msg.addRecipients(Message.RecipientType.TO, mail.getAddressee());
+		msg.setSubject(mail.getSubject());
+		msg.addHeader("X-Priority", mail.getPriority());
+		Date sendDate = new Date();
+		msg.setSentDate(sendDate);
+		msg.setText(mail.getMsg());
+		// Set the send timestamp in the mail object
+		mail.setTimestamp(sendDate);
+		Transport.send(msg);
+		log.info("Mail sent successfully!");
+		log.info("Send time: " + mail.getTimestamp());
+		log.info(mail.toString());
+		
 	}
 	
 	public void setLogOn(boolean log){
